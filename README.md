@@ -1,4 +1,5 @@
-# ![node-nicolive][.svg] Node-nicolive [![NPM version][npm-image]][npm] <!--[![Build Status][travis-image]][travis] [![Coverage Status][coveralls-image]][coveralls]-->
+# ![node-nicolive][.svg] Node-nicolive [![NPM version][npm-image]][npm]
+<!--[![Build Status][travis-image]][travis] [![Coverage Status][coveralls-image]][coveralls]-->
 
 > Command line comment viewer
 
