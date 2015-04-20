@@ -20,6 +20,7 @@ class Nicolive
     cli= new Command
     cli.version require('../package').version
     cli.usage '<URL> [options...]'
+    cli.option '-f, --from [number]','Get [0~1000] comment of past.',0
     cli.option '-v, --verbose','Output debug log.'
     cli.parse argv
     cli.help() if cli.args.length is 0
@@ -28,33 +29,31 @@ class Nicolive
       throw error if error?
 
       chunks= ''
-      chunk_id= null
 
       viewer.on 'timeout',-> console.log h1('Timeout'),arguments if cli.verbose
       viewer.on 'lookup',-> console.log h1('Lookup'),arguments if cli.verbose
       viewer.on 'error',-> console.log h1('Error'),arguments if cli.verbose
-      viewer.on 'data',(chunk)->
-        chunks+= chunk.toString()
-        chunk_id= setTimeout ->
-          data= cheerio '<data>'+chunks.toString()+'</data>'
+      viewer.on 'data',(buffer)->
+        chunk= buffer.toString()
+        chunks+= chunk
+        return unless chunk.match /\u0000$/
 
-          clearTimeout chunk_id
-          chunks= ''
+        data= cheerio '<data>'+chunks+'</data>'
+        chunks= ''
 
-          resultcode= data.find('thread').attr 'resultcode'
-          if resultcode?.length
-            {code,description}= resultcodes[resultcode]
+        resultcode= data.find('thread').attr 'resultcode'
+        if resultcode?.length
+          {code,description}= resultcodes[resultcode]
 
-            console.log h1('resultcode='+resultcode),code,description if cli.verbose
+          console.log h1('Resultcode is '+resultcode),code,description if cli.verbose
 
-          chats= data.find('chat')
-          for chat in chats
-            attr= cheerio(chat).attr()
-            
-            number= ('   '+(attr.no or '?')).slice(-3)
-            text= cheerio(chat).text()
-            console.log h2('Received',number+':'),text
-        ,250
+        chats= data.find('chat')
+        for chat in chats
+          attr= cheerio(chat).attr()
+          
+          number= ('   '+(attr.no or '?')).slice(-3)
+          text= cheerio(chat).text()
+          console.log h2('Received',number+':'),text
 
       if cli.verbose
         {port,addr,thread,version,res_from}= viewer.params
@@ -68,8 +67,10 @@ class Nicolive
   
   view: (url,args...,callback)->
     options= args[0] or {}
+    options.from?= '1000'
 
     getLocalCookie 'nicovideo.jp',(error,cookie)->
+      return callback error if error?
       id= url.match(/lv\d+/)?[0]
       url= api.getplayerstatus+id
 
@@ -81,7 +82,7 @@ class Nicolive
           Cookie: cookie
       ,(error,res,body)->
         result= cheerio body
-        return callback error if error
+        return callback error if error?
         return callback body if result.find('error').text().length
 
         ms= result.find('ms')
@@ -90,7 +91,7 @@ class Nicolive
         addr= ms.find('addr').text()
         
         version= '20061206'
-        res_from= '-1000'
+        res_from= -1*options.from
 
         viewer= net.connect port,addr
         viewer.on 'connect',->

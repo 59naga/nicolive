@@ -6,7 +6,11 @@
 ## Installation
 ```bash
 $ npm install nicolive --global
-$ nicolive http://live.nicovideo.jp/watch/lv********
+$ nicolive lv******** --verbose --from 1000
+# Request to http://live.nicovideo.jp/api/getplayerstatus?v=lv********
+# Connect to http://msg102.live.nicovideo.jp:2812/api/thread?thread=****&version=20061206&res_from=-1000
+# Or  static http://msg102.live.nicovideo.jp:87/api/thread?thread=****&version=20061206&res_from=-1000
+# resultcode=0 FOUND コメント受信を開始します
 # Received   1: わこつ
 ```
 
@@ -33,7 +37,6 @@ nicolive.view(url,options,function(error,viewer){
 });
 ```
 
-<!--
 ## 参考
 * [niconicoのメッセージ(コメント)サーバーのタグや送り方の説明 2014-03-18 by hocomodashi][A]
 * [node-nicovideo-api by Ragg-][B]
@@ -42,7 +45,6 @@ nicolive.view(url,options,function(error,viewer){
 [A]: http://blog.goo.ne.jp/hocomodashi/e/3ef374ad09e79ed5c50f3584b3712d61
 [B]: https://github.com/Ragg-/node-nicovideo-api
 [C]: http://xcatsan.blogspot.jp/2009/08/safari.html
--->
 
 License
 =========================

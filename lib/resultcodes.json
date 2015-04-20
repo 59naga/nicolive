@@ -3,7 +3,7 @@
   "resultcodes":{
     "0": {
       "code": "FOUND",
-      "description": "スレッドを見つけた"
+      "description": "コメント受信を開始します"
     },
     "1": {
       "code": "NOT_FOUND",
