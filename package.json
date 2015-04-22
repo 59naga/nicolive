@@ -3,7 +3,7 @@
   "main": "nicolive",
   "bin" : "nicolive",
   "description": "Command line comment viewer",
-  "version": "0.0.0-rc.1",
+  "version": "0.0.0-rc.2",
 
   "dependencies": {
     "binary-cookies": "git://github.com/jlipps/node-binary-cookies.git",

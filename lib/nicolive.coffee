@@ -14,8 +14,11 @@ resultcodes= (require './resultcodes').resultcodes
 
 api=
   getplayerstatus: 'http://live.nicovideo.jp/api/getplayerstatus?v='
+  nickname: 'http://seiga.nicovideo.jp/api/user/info?id='
 
 class Nicolive
+  constructor: (@knownNicknames={})->
+
   cli: (argv)->
     cli= new Command
     cli.version require('../package').version
@@ -81,11 +84,12 @@ class Nicolive
         headers:
           Cookie: cookie
       ,(error,res,body)->
-        result= cheerio body
+        response= cheerio body
+        errorMessage= response.find('error').text()
         return callback error if error?
-        return callback body if result.find('error').text().length
+        return callback errorMessage if errorMessage.length
 
-        ms= result.find('ms')
+        ms= response.find('ms')
         thread= ms.find('thread').text()
         port= ms.find('port').text()
         addr= ms.find('addr').text()
@@ -102,8 +106,22 @@ class Nicolive
           viewer.write comment.toString()+'\0'
           viewer.setEncoding 'utf-8'
 
-        viewer.params= {url,port,addr,thread,version,res_from}
+        viewer.params= {url,port,addr,thread,version,res_from,response}
 
         callback null,viewer
+  
+  getNickname: (user_id,callback)->
+    if @knownNicknames[user_id]?
+      process.nextTick =>
+        callback null,@knownNicknames[user_id]
+      return
+
+    request api.nickname+user_id,(error,res,body)=>
+      result= cheerio body
+      return callback error if error?
+      return callback result.find('error').text() if result.find('error').text().length
+
+      @knownNicknames[user_id]= result.find('nickname').text()
+      callback null,@knownNicknames[user_id]
 
 module.exports= new Nicolive
