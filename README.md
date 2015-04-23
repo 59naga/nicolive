@@ -6,7 +6,7 @@
 ```bash
 $ npm install nicolive --global
 $ nicolive -V
-# 0.0.0-rc.4
+# 0.0.0-rc.5
 ```
 
 ## CLI
