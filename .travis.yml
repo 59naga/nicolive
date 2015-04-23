@@ -1,0 +1,26 @@
+# Quick boot options
+sudo: false
+cache:
+  directories:
+    - node_modules
+
+# Language options
+language: node_js
+node_js:
+  - '0.10'
+
+# Setting process.env
+env:
+  global:
+    # COVERALLS_REPO_TOKEN
+    - secure: kXwMdpVKrokKUMrxRPseD772v5noLQSBBB3qtGOgWftxw5qnzg0HqE48cb3FHVwUPoKo3XlM2uVmzlaxm6MwcE33+yIpAgs0eb3xzKsV+idID/PlAKFkbigNAWTtaWyZiYfS7kMXgqqayouWDc2ZTTcYocBA5GiUx4PfzfVL5HY=
+    # LOGIN_ID / LOGIN_PW
+    - secure: CPXHLEGAP94/Fxwm+AzAgb4m2N+T0yK+euqEa7gc3051L9FI0S4/nCjUfJcaNsOdnX+0HGuoFPp/Wbv7TO+b7pYN38e0Som+bHsalp06jHWkH79QLIbHM9OtptnKoLpSPaDcvWSiXDwyjVS5ks/SvpfNNJw8EJhr9x1GSZzThuQ=
+    - secure: dqp7GUVL2KyyO9FXAUbImiEIHCc0lzVinwRwTnF7CIyRoPjglMMFqg4Z/vN0VL1jX8QQ87Yqth0/Opr6y41DzVeqf/HIKD4oLkiVXcDD0ZTch36AZQiTRUdGDvSdyJSut2Bf5/l6IHlezY70QJMTzvG26XM4mIycMRBTVYP4vTs=
+
+# `npm publish` options After success
+deploy:
+  provider: npm
+  email: i59naga@icloud.com
+  api_key:
+    secure: WSVppuVD2FBC9/jQ2musLnFOdpRydYLsDPUpxj8qDvrHKTpYdGWZ2bYBI+SR4tZNvfPVLk7voUOd7tQBzcDQGH6XlynP2aoqk3OhwzWCL5MyMNaGndbhLgsgt+f3bVwSqTlNxvc0UKxhkejV8PijgJE/7yVyssiE++Nbbfi/a44=

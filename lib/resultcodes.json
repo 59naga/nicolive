@@ -7,55 +7,55 @@
     },
     "1": {
       "code": "NOT_FOUND",
-      "description": "スレッドが見つからない"
+      "description": "スレッドがありません"
     },
     "2": {
       "code": "INVALID",
-      "description": "スレッドIDがおかしい"
+      "description": "不正なスレッドIDです"
     },
     "3": {
       "code": "VERSION",
-      "description": "パケットバージョンがおかしい"
+      "description": "不正なパケットバージョンです"
     },
     "4": {
       "code": "INVALID_WAYBACKKEY",
-      "description": "ウェイバックキーが無い、一致しない"
+      "description": "不正なウェイバックキーです"
     },
     "5": {
       "code": "TOO_ODD_WAYBACKKEY",
-      "description": "ウェイバックキーの形式がおかしい"
+      "description": "対応できないウェイバックキーです"
     },
     "6": {
       "code": "INVALID_ADMINKEY",
-      "description": "管理者キーが無い、一致しない"
+      "description": "不正な管理者キーです"
     },
     "7": {
       "code": "TOO_ODD_ADMINKEY",
-      "description": "管理者キーの形式がおかしい"
+      "description": "対応できない管理者キーです"
     },
     "8": {
       "code": "INVALID_THREADKEY",
-      "description": "スレッドキーが無い、一致しない"
+      "description": "不正なスレッドキーです"
     },
     "9": {
       "code": "TOO_ODD_THREADKEY",
-      "description": "スレッドキーの形式がおかしい"
+      "description": "対応できないスレッドキーです"
     },
     "10": {
       "code": "NOT_IMPLEMENTED",
-      "description": "実装されていない？"
+      "description": "未実装の機能が呼び出されました"
     },
     "11": {
       "code": "LEAF_NOT_ACTIVATE",
-      "description": "リーフ管理されていない"
+      "description": "未承認のリーフが指定されました"
     },
     "12": {
       "code": "LEAF_NOT_ACTIVATE",
-      "description": "リーフ管理されていない"
+      "description": "未承認のリーフが指定されました"
     },
     "13": {
       "code": "LANGUAGE_NOT_FOUND",
-      "description": "言語が間違っている"
+      "description": "不正な言語が指定されました"
     }
   }
 }

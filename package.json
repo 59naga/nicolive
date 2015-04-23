@@ -3,21 +3,25 @@
   "main": "nicolive",
   "bin" : "nicolive",
   "description": "Command line comment viewer",
-  "version": "0.0.0-rc.2",
+  "version": "0.0.0-rc.3",
 
+  "scripts": {
+    "oldstart": "node nicolive",
+    "start": "jasminetea test --verbose --watch --recursive",
+    "test": "jasminetea test --verbose --cover --report"
+  },
   "dependencies": {
-    "binary-cookies": "git://github.com/jlipps/node-binary-cookies.git",
     "chalk": "^1.0.0",
     "cheerio": "^0.19.0",
     "coffee-script": "^1.9.2",
     "commander": "^2.8.0",
+    "readline-sync": "^0.8.0",
     "request": "^2.55.0"
   },
-
-  "scripts": {
-    "start": "node nicolive"
+  "devDependencies": {
+    "jasminetea": "^0.1.28"
   },
-
+  
   "author": "59naga <i59naga@icloud.com> (http://berabou.me)",
   "license": "MIT",
   "keywords": [

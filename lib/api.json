@@ -1,0 +1,13 @@
+{
+  "login": "https://secure.nicovideo.jp/secure/login?show_button_twitter=1&site=niconico&show_button_facebook=1&next_url=&facebook=1&nolinks=0&twitter=1",
+  "logout": "https://secure.nicovideo.jp/secure/logout",
+
+  "ping": "http://live.nicovideo.jp/api/getplayerstatus/nsen/vocaloid",
+  "view": "http://live.nicovideo.jp/api/getplayerstatus?v=",
+  "comment": "http://live.nicovideo.jp/api/getpostkey?thread=",
+
+  "fetchNickname": "http://seiga.nicovideo.jp/api/user/info?id=",
+  
+  "usericonURL": "http://usericon.nimg.jp/usericon/",
+  "usericonEmptyURL": "http://uni.res.nimg.jp/img/user/thumb/blank.jpg"
+}

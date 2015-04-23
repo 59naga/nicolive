@@ -1,23 +1,27 @@
-# ![node-nicolive][.svg] Node-nicolive [![NPM version][npm-image]][npm]
-<!--[![Build Status][travis-image]][travis] [![Coverage Status][coveralls-image]][coveralls]-->
+# ![node-nicolive][.svg] Node-nicolive [![NPM version][npm-image]][npm] [![Build Status][travis-image]][travis] [![Coverage Status][coveralls-image]][coveralls]
 
 > Command line comment viewer
 
 ## Installation
 ```bash
 $ npm install nicolive --global
-$ nicolive lv******** --verbose --from 1000
-# Request to http://live.nicovideo.jp/api/getplayerstatus?v=lv********
+$ nicolive lv218499873 --verbose --from 1000
+email: your@email.address
+password: ********
+# Request to http://live.nicovideo.jp/api/getplayerstatus?v=lv218499873
 # Connect to http://msg102.live.nicovideo.jp:2812/api/thread?thread=****&version=20061206&res_from=-1000
 # Or  static http://msg102.live.nicovideo.jp:87/api/thread?thread=****&version=20061206&res_from=-1000
-# resultcode=0 FOUND コメント受信を開始します
+# Resultcode 0 FOUND コメント受信を開始します
 # Received   1: わこつ
-```
 
-## Requirement
-* node.js v0.10.36
-* Mac OSX Yosemite 10.10.2
-* Safari 8.0.4(Signed in nicovideo)
+^C
+$ nicolive lv218499873
+# Resultcode 0 FOUND コメント受信を開始します
+
+^C
+$ nicolive logout
+# Exited
+```
 
 ## API
 ```bash
@@ -26,15 +30,29 @@ $ npm install nicolive --save
 
 ```js
 var nicolive= require('nicolive');
-var url= 'http://live.nicovideo.jp/watch/lv********';
-var options= {};
-nicolive.view(url,options,function(error,viewer){
+nicolive.login('your@email.address','********',function(error,cookie){
   if(error) throw error;
+  
+  var url= 'http://live.nicovideo.jp/watch/lv218499873';
+  var options= {};
+  nicolive.view(url,options,function(error,viewer){
+    if(error) throw error;
 
-  viewer.on('data',function(chunk){
-    console.log(chunk.toString());// chunk xml
+    viewer.on('handshaked',function(chunk){
+      viewer.comment('わこつ');
+    });
+    viewer.on('comment',function(comment){
+      console.log(comment.text());// わこつ
+    });
   });
 });
+```
+
+## TEST
+```bash
+export LOGIN_ID=$(echo -n 'YOUR_MAILADDRESS' | base64)
+export LOGIN_PW=$(echo -n 'YOUR_PASSWORD' | base64)
+npm test
 ```
 
 ## 参考
@@ -52,7 +70,6 @@ License
 
 [License]: http://59naga.mit-license.org/
 [.svg]: https://cdn.rawgit.com/59naga/nicolive/master/.svg
-
 
 [npm-image]: https://badge.fury.io/js/nicolive.svg
 [npm]: https://npmjs.org/package/nicolive
