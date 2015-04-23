@@ -51,7 +51,7 @@ nicolive.login('your@email.address','********',function(error,cookie){
       viewer.comment('わこつ');
     });
     viewer.on('comment',function(comment){
-      console.log(comment.text());// わこつ
+      console.log(comment.text);// わこつ
 
       nicolive.logout(function(error){
         if(error) throw error;
