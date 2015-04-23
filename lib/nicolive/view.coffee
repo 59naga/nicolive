@@ -66,6 +66,7 @@ module.exports= (live,args...,callback)->
           ticket= data.find('thread').attr 'ticket'
 
           console.log h1('Resultcode '+resultcode+':'),code,description unless process.env.JASMINETEA_ID?
+          console.log h1('Got:'),data.find('thread').attr() if options.verbose 
 
           viewer.comment= (text,options={})->
             attrs= JSON.parse JSON.stringify {thread,ticket,postkey,mail,user_id,premium}
