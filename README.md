@@ -30,7 +30,7 @@ $ nicolive logout
 # Exited
 ```
 
-> [Nsen lv218499873][http://live.nicovideo.jp/watch/nsen/vocaloid]
+> [Nsen lv218499873](http://live.nicovideo.jp/watch/nsen/vocaloid)
 
 ## API
 ```bash
