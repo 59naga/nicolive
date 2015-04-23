@@ -57,6 +57,7 @@ module.exports= (live,args...,callback)->
         chunks+= chunk
         return unless chunk.match /\u0000$/
 
+        console.log chunks if options.verbose
         data= cheerio '<data>'+chunks+'</data>'
         chunks= ''
 
@@ -68,21 +69,27 @@ module.exports= (live,args...,callback)->
           console.log h1('Resultcode '+resultcode+':'),code,description unless process.env.JASMINETEA_ID?
           console.log h1('Got:'),data.find('thread').attr() if options.verbose 
 
-          viewer.comment= (text,options={})->
+          viewer.comment= (text,optionAttrs={})->
             attrs= JSON.parse JSON.stringify {thread,ticket,postkey,mail,user_id,premium}
-            attrs[key]= value for key,value of options
+            attrs[key]= value for key,value of optionAttrs
 
             chat= cheerio '<chat/>'
             chat.attr attrs
             chat.text text
 
+            # 不正な値が入れると受信されるが表示されない場合がある
             viewer.write chat.toString()+'\0'
+            console.log 'Wrote',chat.toString()+'\0' if options.verbose
+            
           viewer.emit 'handshaked' if resultcode is '0'
           viewer.emit 'error',resultcode if resultcode isnt '0'
 
         comments= data.find('chat')
         for comment in comments
           element= cheerio comment
+
+          console.log element.toString() if options.verbose
+
           comment=
             attr: element.attr()
             text: element.text()

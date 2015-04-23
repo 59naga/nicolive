@@ -42,6 +42,6 @@ module.exports= (argv)->
       return console.error error if error?
 
       viewer.on 'handshaked',->
-        viewer.comment cli.args[1],cli if cli.args[1]
+        viewer.comment cli.args[1] if cli.args[1]
       viewer.on 'comment',(comment)->
         console.log h2('Received',(comment.attr.no ? '-')+':'),comment.text
