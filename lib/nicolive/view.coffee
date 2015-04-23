@@ -39,8 +39,10 @@ module.exports= (live,args...,callback)->
       headers:
         Cookie: @get()
     ,(error,res,postkeyBody)=>
-      [...,postkey]= postkeyBody.split '='
+      [...,postkey]= postkeyBody.split '.'
       return callback error if error?
+
+      console.log h1('Got'),postkey,'by',postkeyBody if options.verbose
 
       viewer= net.connect port,addr
       viewer.on 'connect',->

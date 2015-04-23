@@ -3,7 +3,7 @@
   "main": "nicolive",
   "bin" : "nicolive",
   "description": "Command line comment viewer",
-  "version": "0.0.0-rc.7",
+  "version": "0.0.0-rc.8",
 
   "scripts": {
     "oldstart": "node nicolive",
