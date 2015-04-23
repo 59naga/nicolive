@@ -38,10 +38,10 @@ module.exports= (argv)->
       view()
 
   view= =>
-    @view cli.args[0],cli,(error,viewer)->
+    @view cli.args[0],cli,(error,viewer)=>
       return console.error error if error?
 
-      viewer.on 'handshaked',->
-        viewer.comment cli.args[1] if cli.args[1]
+      viewer.on 'handshaked',(attrs)=>
+        @comment cli.args[1],attrs,cli if cli.args[1]
       viewer.on 'comment',(comment)->
         console.log h2('Received',(comment.attr.no ? '-')+':'),comment.text

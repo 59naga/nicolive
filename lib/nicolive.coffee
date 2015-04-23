@@ -10,6 +10,8 @@ class Nicolive extends require './session'
     require './nicolive/ping'
   view:
     require './nicolive/view'
+  comment:
+    require './nicolive/comment'
 
   # Login unnecessary
   fetchNickname:
