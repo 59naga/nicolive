@@ -5,23 +5,32 @@
 ## Installation
 ```bash
 $ npm install nicolive --global
-$ nicolive lv218499873 --verbose --from 1000
+$ nicolive -V
+# 0.0.0-rc.4
+```
+
+## CLI
+```bash
+$ nicolive lv218499873 --verbose
+# Please authorization.
 email: your@email.address
 password: ********
 # Request to http://live.nicovideo.jp/api/getplayerstatus?v=lv218499873
 # Connect to http://msg102.live.nicovideo.jp:2812/api/thread?thread=****&version=20061206&res_from=-1000
 # Or  static http://msg102.live.nicovideo.jp:87/api/thread?thread=****&version=20061206&res_from=-1000
 # Resultcode 0 FOUND コメント受信を開始します
-# Received   1: わこつ
 
 ^C
-$ nicolive lv218499873
+$ nicolive lv218499873 わこつ
 # Resultcode 0 FOUND コメント受信を開始します
+# Received   1: わこつ
 
 ^C
 $ nicolive logout
 # Exited
 ```
+
+> [Nsen lv218499873][http://live.nicovideo.jp/watch/nsen/vocaloid]
 
 ## API
 ```bash
@@ -38,11 +47,16 @@ nicolive.login('your@email.address','********',function(error,cookie){
   nicolive.view(url,options,function(error,viewer){
     if(error) throw error;
 
-    viewer.on('handshaked',function(chunk){
+    viewer.on('handshaked',function(){
       viewer.comment('わこつ');
     });
     viewer.on('comment',function(comment){
       console.log(comment.text());// わこつ
+
+      nicolive.logout(function(error){
+        if(error) throw error;
+        process.exit(0);
+      });
     });
   });
 });
@@ -58,11 +72,9 @@ npm test
 ## 参考
 * [niconicoのメッセージ(コメント)サーバーのタグや送り方の説明 2014-03-18 by hocomodashi][A]
 * [node-nicovideo-api by Ragg-][B]
-* [Safari のクッキーはどう保存されているのか？ 2009-08-18 by xcatsan][C]
 
 [A]: http://blog.goo.ne.jp/hocomodashi/e/3ef374ad09e79ed5c50f3584b3712d61
 [B]: https://github.com/Ragg-/node-nicovideo-api
-[C]: http://xcatsan.blogspot.jp/2009/08/safari.html
 
 License
 =========================

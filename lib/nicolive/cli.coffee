@@ -16,7 +16,7 @@ module.exports= (argv)->
     .command 'logout'
     .action =>
       @logout ->
-        console.log 'Exited'
+        console.log 'Destroied session.'
         process.exit 0
 
   cli.parse argv
@@ -25,11 +25,13 @@ module.exports= (argv)->
 
   @ping (error)=>
     if error
+      console.log 'Please authorization.'
       id= readlineSync.question 'email: '
       pw= readlineSync.question 'password: ',noEchoBack:yes
 
       @login id,pw,(error)->
         return console.error error if error?
+        console.log 'Authorized.'
 
         view()
     else
@@ -37,7 +39,9 @@ module.exports= (argv)->
 
   view= =>
     @view cli.args[0],cli,(error,viewer)->
-      throw error if error?
+      return console.error error if error?
 
+      viewer.on 'handshaked',->
+        viewer.comment cli.args[1],cli if cli.args[1]
       viewer.on 'comment',(comment)->
         console.log h2('Received',(comment.attr.no ? '-')+':'),comment.text
