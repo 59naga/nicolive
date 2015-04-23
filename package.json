@@ -8,7 +8,7 @@
   "scripts": {
     "oldstart": "node nicolive",
     "start": "jasminetea test --verbose --watch --recursive",
-    "test": "jasminetea test --verbose --cover --report"
+    "test": "jasminetea test --verbose --cover --report --timeout 5000"
   },
   "dependencies": {
     "chalk": "^1.0.0",
