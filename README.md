@@ -47,8 +47,8 @@ nicolive.login('your@email.address','********',function(error,cookie){
   nicolive.view(url,options,function(error,viewer){
     if(error) throw error;
 
-    viewer.on('handshaked',function(){
-      viewer.comment('わこつ');
+    viewer.on('handshaked',function(attr){
+      nicolive.comment('わこつ',attr);
     });
     viewer.on('comment',function(comment){
       console.log(comment.text);// わこつ
