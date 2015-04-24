@@ -23,7 +23,7 @@ module.exports= (live_id,args...,callback)->
 
     console.log h1('Request to'),url.comment+thread if options.verbose
 
-    @viewer.end() if @viewer?
+    @viewer.destroy() if @viewer?
     @viewer= net.connect port,addr
     @viewer.on 'connect',=>
       comment= cheerio '<thread />'
