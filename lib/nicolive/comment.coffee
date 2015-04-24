@@ -2,6 +2,7 @@ request= require 'request'
 cheerio= require 'cheerio'
 
 {url,status}= require '../api'
+querystring= require 'querystring'
 
 chalk= require 'chalk'
 h1= chalk.underline.magenta
@@ -12,7 +13,10 @@ module.exports= (text,options,callback)->
   return callback new Error 'Disconnected' unless @viewer?
 
   request
-    url: url.getPostKey+@attrs.thread
+    url: url.getPostKey+'?'+querystring.stringify {
+      thread: @attrs.thread
+      block_no: Math.floor((@playerStatus.comment_count+1)/100)
+    }
     headers:
       Cookie: @get()
   ,(error,res,postkeyBody)=>

@@ -13,9 +13,11 @@ module.exports= (live_id,args...,callback)->
 
   @getPlayerStatus live_id,options,(error,playerStatus)=>
     return callback error if error?
+    @playerStatus= playerStatus
     {
       port,addr
       thread,version,res_from
+      comment_count
       user_id,premium,mail
     }= playerStatus
 
@@ -69,6 +71,8 @@ module.exports= (live_id,args...,callback)->
           comment.usericon= url.usericonURL+user_id.slice(0,2)+'/'+user_id+'.jpg' if user_id
 
         @viewer.emit 'comment',comment
+
+      @playerStatus.comment_count= comment.attr.no if comment.attr.no>@playerStatus.comment_count
 
     if options.verbose
       console.log h1('Connect to'),"""

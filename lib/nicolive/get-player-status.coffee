@@ -32,6 +32,7 @@ module.exports= (live_id,args...,callback)->
 
     user_id= playerStatus.find('user_id').eq(0).text()
     premium= playerStatus.find('is_premium').eq(0).text()
+    comment_count= playerStatus.find('comment_count').eq(0).text()
     mail= '184'
 
     callback null,{
@@ -44,5 +45,6 @@ module.exports= (live_id,args...,callback)->
 
       user_id
       premium
+      comment_count
       mail
     }
