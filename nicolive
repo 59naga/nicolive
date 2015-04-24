@@ -7,11 +7,6 @@ if(typeof require('module')._extensions['.coffee']==='undefined'){
 var nicolive= require('./lib/nicolive');
 
 if(module.parent===null){
-  process.on('uncaughtException',function(error){
-    throw error;
-    process.exit(1);
-  });
-  
   nicolive.cli(process.argv);
 }
 
