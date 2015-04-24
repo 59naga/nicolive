@@ -51,48 +51,6 @@ describe 'nicolive',->
         expect(viewer instanceof EventEmitter).toBe true
 
         done()
-    it 'nsen/toho',(done)->
-      nicolive.view 'nsen/toho',(error,viewer)->
-        expect(error).toBe null
-        expect(viewer instanceof EventEmitter).toBe true
-
-        done()
-    it 'nsen/nicoindies',(done)->
-      nicolive.view 'nsen/nicoindies',(error,viewer)->
-        expect(error).toBe null
-        expect(viewer instanceof EventEmitter).toBe true
-
-        done()
-    it 'nsen/sing',(done)->
-      nicolive.view 'nsen/sing',(error,viewer)->
-        expect(error).toBe null
-        expect(viewer instanceof EventEmitter).toBe true
-
-        done()
-    it 'nsen/play',(done)->
-      nicolive.view 'nsen/play',(error,viewer)->
-        expect(error).toBe null
-        expect(viewer instanceof EventEmitter).toBe true
-
-        done()
-    it 'nsen/pv',(done)->
-      nicolive.view 'nsen/pv',(error,viewer)->
-        expect(error).toBe null
-        expect(viewer instanceof EventEmitter).toBe true
-
-        done()
-    it 'nsen/hotaru',(done)->
-      nicolive.view 'nsen/hotaru',(error,viewer)->
-        expect(error).toBe null
-        expect(viewer instanceof EventEmitter).toBe true
-
-        done()
-    it 'nsen/allgenre',(done)->
-      nicolive.view 'nsen/allgenre',(error,viewer)->
-        expect(error).toBe null
-        expect(viewer instanceof EventEmitter).toBe true
-
-        done()
 
   describe '.comment',->
     it 'nsen/hotaru',(done)->

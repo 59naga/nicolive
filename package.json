@@ -19,7 +19,7 @@
     "request": "^2.55.0"
   },
   "devDependencies": {
-    "jasminetea": "^0.1.28"
+    "jasminetea": "^0.1.29"
   },
   
   "author": "59naga <i59naga@icloud.com> (http://berabou.me)",
