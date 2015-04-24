@@ -71,8 +71,7 @@ module.exports= (live_id,args...,callback)->
           comment.usericon= url.usericonURL+user_id.slice(0,2)+'/'+user_id+'.jpg' if user_id
 
         @viewer.emit 'comment',comment
-
-      @playerStatus.comment_count= comment.attr.no if comment.attr.no>@playerStatus.comment_count
+        @playerStatus.comment_count= comment.attr.no if comment.attr.no>@playerStatus.comment_count
 
     if options.verbose
       console.log h1('Connect to'),"""
