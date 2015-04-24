@@ -1,7 +1,7 @@
 request= require 'request'
 cheerio= require 'cheerio'
 
-api= require '../api'
+{url}= require '../api'
 
 module.exports= (user_id,callback)-> 
   @knownNicknames?= {}
@@ -11,7 +11,7 @@ module.exports= (user_id,callback)->
     return
   
   options=
-    url: api.fetchNickname+user_id
+    url: url.fetchNickname+user_id
   request options,(error,res,body)=>
     result= cheerio body
     return callback error if error?

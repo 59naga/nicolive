@@ -6,8 +6,7 @@ net= require 'net'
 chalk= require 'chalk'
 h1= chalk.underline.magenta
 
-api= require '../api'
-resultcodes= (require '../resultcodes').resultcodes
+{url,resultcode}= require '../api'
 
 module.exports= (live_id,args...,callback)->
   options= args[0] ? {}
@@ -20,7 +19,7 @@ module.exports= (live_id,args...,callback)->
       user_id,premium,mail
     }= playerStatus
 
-    console.log h1('Request to'),api.comment+thread if options.verbose
+    console.log h1('Request to'),url.comment+thread if options.verbose
 
     @viewer.end() if @viewer?
     @viewer= net.connect port,addr
@@ -42,17 +41,17 @@ module.exports= (live_id,args...,callback)->
       data= cheerio '<data>'+chunks+'</data>'
       chunks= ''
 
-      resultcode= data.find('thread').attr 'resultcode'
-      if resultcode?.length
-        {code,description}= resultcodes[resultcode]
+      resultcodeValue= data.find('thread').attr 'resultcode'
+      if resultcodeValue?.length
+        {code,description}= resultcode[resultcodeValue]
         ticket= data.find('thread').attr 'ticket'
 
-        console.log h1('Resultcode '+resultcode+':'),code,description unless process.env.JASMINETEA_ID?
-        console.log h1('Chat attrs:'),{thread,ticket,mail,user_id,premium} if options.verbose and resultcode is '0'
+        console.log h1('Resultcode '+resultcodeValue+':'),code,description unless process.env.JASMINETEA_ID?
+        console.log h1('Chat attrs:'),{thread,ticket,mail,user_id,premium} if options.verbose and resultcodeValue is '0'
         
         @attrs= {thread,ticket,mail,user_id,premium}
-        @viewer.emit 'handshaked',@attrs if resultcode is '0'
-        @viewer.emit 'error',data.find('thread').toString() if resultcode isnt '0'
+        @viewer.emit 'handshaked',@attrs if resultcodeValue is '0'
+        @viewer.emit 'error',data.find('thread').toString() if resultcodeValue isnt '0'
 
       comments= data.find 'chat'
       for comment in comments
@@ -63,11 +62,11 @@ module.exports= (live_id,args...,callback)->
         comment=
           attr: element.attr()
           text: element.text()
-          usericon: api.usericonEmptyURL
+          usericon: url.usericonEmptyURL
 
         {anonymity,user_id}= comment.attr
         unless anonymity?
-          comment.usericon= api.usericonURL+user_id.slice(0,2)+'/'+user_id+'.jpg' if user_id
+          comment.usericon= url.usericonURL+user_id.slice(0,2)+'/'+user_id+'.jpg' if user_id
 
         @viewer.emit 'comment',comment
 

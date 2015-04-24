@@ -1,7 +1,7 @@
 request= require 'request'
 cheerio= require 'cheerio'
 
-api= require '../api'
+{url,status}= require '../api'
 
 chalk= require 'chalk'
 h1= chalk.underline.magenta
@@ -12,7 +12,7 @@ module.exports= (text,options,callback)->
   return callback new Error 'Disconnected' unless @viewer?
 
   request
-    url: api.getPostKey+@attrs.thread
+    url: url.getPostKey+@attrs.thread
     headers:
       Cookie: @get()
   ,(error,res,postkeyBody)=>
@@ -40,13 +40,14 @@ module.exports= (text,options,callback)->
     data= cheerio '<data>'+chunks+'</data>'
     chunks= ''
 
-    status= data.find('chat_result').attr 'status'
-    if status.length
-      console.log h1('Chat result'),status if options.verbose
+    statusValue= data.find('chat_result').attr 'status'
+    if statusValue.length
+      console.log h1('Chat result'),statusValue if options.verbose
 
       @viewer.removeListener 'data',chatResult
       
-      if status is '0'
-        callback null,status
+      {code,description}= status[statusValue]
+      if statusValue is '0'
+        callback null,statusValue
       else
-        callback new Error 'Status is '+status
+        callback new Error 'Status is '+statusValue+':'+code+' '+description

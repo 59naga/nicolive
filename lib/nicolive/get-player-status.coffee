@@ -1,7 +1,7 @@
 request= require 'request'
 cheerio= require 'cheerio'
 
-api= require '../api'
+{url}= require '../api'
 
 chalk= require 'chalk'
 h1= chalk.underline.magenta
@@ -9,10 +9,10 @@ h1= chalk.underline.magenta
 module.exports= (live_id,args...,callback)->
   options= args[0] ? {}
   
-  console.log h1('Request to'),api.getPlayerStatus+live_id if options.verbose
+  console.log h1('Request to'),url.getPlayerStatus+live_id if options.verbose
 
   request
-    url: api.getPlayerStatus+live_id
+    url: url.getPlayerStatus+live_id
     headers:
       Cookie: @get()
   ,(error,res,body)=>

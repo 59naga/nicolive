@@ -1,12 +1,107 @@
 {
-  "login": "https://secure.nicovideo.jp/secure/login?show_button_twitter=1&site=niconico&show_button_facebook=1&next_url=&facebook=1&nolinks=0&twitter=1",
-  "logout": "https://secure.nicovideo.jp/secure/logout",
+  "description":"http://blog.goo.ne.jp/hocomodashi/e/3ef374ad09e79ed5c50f3584b3712d61",
+  "url": {
+    "login": "https://secure.nicovideo.jp/secure/login?show_button_twitter=1&site=niconico&show_button_facebook=1&next_url=&facebook=1&nolinks=0&twitter=1",
+    "logout": "https://secure.nicovideo.jp/secure/logout",
 
-  "getPlayerStatus": "http://live.nicovideo.jp/api/getplayerstatus/",
-  "getPostKey": "http://live.nicovideo.jp/api/getpostkey?thread=",
+    "getPlayerStatus": "http://live.nicovideo.jp/api/getplayerstatus/",
+    "getPostKey": "http://live.nicovideo.jp/api/getpostkey?thread=",
 
-  "fetchNickname": "http://seiga.nicovideo.jp/api/user/info?id=",
-  
-  "usericonURL": "http://usericon.nimg.jp/usericon/",
-  "usericonEmptyURL": "http://uni.res.nimg.jp/img/user/thumb/blank.jpg"
+    "fetchNickname": "http://seiga.nicovideo.jp/api/user/info?id=",
+    
+    "usericonURL": "http://usericon.nimg.jp/usericon/",
+    "usericonEmptyURL": "http://uni.res.nimg.jp/img/user/thumb/blank.jpg"
+  },
+  "status": {
+    "0": {
+      "code":"SUCCESS",
+      "description":"受理されました"
+    },
+    "1": {
+      "code":"FAILURE",
+      "description":"投稿に失敗しました"
+    },
+    "2": {
+      "code":"INVALID_THREAD",
+      "description":"不正なスレッドIDです"
+    },
+    "3": {
+      "code":"INVALID_TICKET",
+      "description":"不正なチケットです"
+    },
+    "4": {
+      "code":"INVALID_POSTKEY",
+      "description":"不正なポストキーです"
+    },
+    "5": {
+      "code":"LOCKED",
+      "description":"コメントはブロックされています"
+    },
+    "6": {
+      "code":"READONLY",
+      "description":"コメントの投稿は禁止されています"
+    },
+    "8": {
+      "code":"TOO_LONG",
+      "description":"コメントが長すぎたため、拒否されました"
+    }
+  },
+  "resultcode":{
+    "0": {
+      "code": "FOUND",
+      "description": "コメント受信を開始します"
+    },
+    "1": {
+      "code": "NOT_FOUND",
+      "description": "スレッドがありません"
+    },
+    "2": {
+      "code": "INVALID",
+      "description": "不正なスレッドIDです"
+    },
+    "3": {
+      "code": "VERSION",
+      "description": "不正なパケットバージョンです"
+    },
+    "4": {
+      "code": "INVALID_WAYBACKKEY",
+      "description": "不正なウェイバックキーです"
+    },
+    "5": {
+      "code": "TOO_ODD_WAYBACKKEY",
+      "description": "対応できないウェイバックキーです"
+    },
+    "6": {
+      "code": "INVALID_ADMINKEY",
+      "description": "不正な管理者キーです"
+    },
+    "7": {
+      "code": "TOO_ODD_ADMINKEY",
+      "description": "対応できない管理者キーです"
+    },
+    "8": {
+      "code": "INVALID_THREADKEY",
+      "description": "不正なスレッドキーです"
+    },
+    "9": {
+      "code": "TOO_ODD_THREADKEY",
+      "description": "対応できないスレッドキーです"
+    },
+    "10": {
+      "code": "NOT_IMPLEMENTED",
+      "description": "未実装の機能が呼び出されました"
+    },
+    "11": {
+      "code": "LEAF_NOT_ACTIVATE",
+      "description": "未承認のリーフが指定されました"
+    },
+    "12": {
+      "code": "LEAF_NOT_ACTIVATE",
+      "description": "未承認のリーフが指定されました"
+    },
+    "13": {
+      "code": "LANGUAGE_NOT_FOUND",
+      "description": "不正な言語が指定されました"
+    }
+  }
 }

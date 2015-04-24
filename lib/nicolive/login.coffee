@@ -1,11 +1,11 @@
 request= require 'request'
 cheerio= require 'cheerio'
 
-api= require '../api'
+{url}= require '../api'
 
 module.exports= (id,pw,callback)-> 
   options=
-    url: api.login
+    url: url.login
     form:
       mail_tel: id
       password: pw

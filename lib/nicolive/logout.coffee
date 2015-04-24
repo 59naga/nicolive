@@ -1,10 +1,10 @@
 request= require 'request'
 
-api= require '../api'
+{url}= require '../api'
 
 module.exports= (callback)-> 
   options=
-    url: api.logout
+    url: url.logout
     headers:
       Cookie: @get()
     followRedirect: off
