@@ -57,7 +57,8 @@ describe 'nicolive',->
       nicolive.view 'nsen/hotaru',(error,viewer)->
         expect(error).toBe null
         expect(viewer instanceof EventEmitter).toBe true
-
+        
+        viewer.on 'error',(error)-> throw error
         viewer.on 'handshaked',(attrs)->
           text= 'node-nicolive comment test at '+(new Date)
           text+= ' via Travis-CI' if process.env.COVERALLS_REPO_TOKEN
