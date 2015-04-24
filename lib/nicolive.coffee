@@ -8,6 +8,9 @@ class Nicolive extends require './session'
 
   ping:
     require './nicolive/ping'
+  getPlayerStatus:
+    require './nicolive/get-player-status'
+
   view:
     require './nicolive/view'
   comment:
@@ -16,10 +19,6 @@ class Nicolive extends require './session'
   # Login unnecessary
   fetchNickname:
     require './nicolive/fetch-nickname'
-
-  # Utility method
-  parse:
-    require './nicolive/parse'
 
   # bin
   cli:

@@ -9,28 +9,16 @@ h1= chalk.underline.magenta
 api= require '../api'
 resultcodes= (require '../resultcodes').resultcodes
 
-module.exports= (live,args...,callback)->
-  id= live.match(/lv\d+/)?[0]
+module.exports= (live_id,args...,callback)->
   options= args[0] ? {}
-  return callback 'Invalid live: '+live unless id?
 
-  console.log h1('Request to'),api.view+id if options.verbose
-
-  request
-    url: api.view+id
-    headers:
-      Cookie: @get()
-  ,(error,res,body)=>
-    errorMessage= cheerio(body).find('error description').text()
+  @getPlayerStatus live_id,options,(error,playerStatus)=>
     return callback error if error?
-    return callback errorMessage if errorMessage.length
-
     {
       port,addr
       thread,version,res_from
       user_id,premium,mail
-      playerStatus
-    }= @parse body,options
+    }= playerStatus
 
     console.log h1('Request to'),api.comment+thread if options.verbose
 
@@ -47,7 +35,7 @@ module.exports= (live,args...,callback)->
     @viewer.on 'data',(buffer)=>
       chunk= buffer.toString()
       chunks+= chunk
-      return unless chunk.match /\u0000$/
+      return unless chunk.match /\0$/
 
       console.log chunks if options.verbose
       data= cheerio '<data>'+chunks+'</data>'
@@ -60,11 +48,12 @@ module.exports= (live,args...,callback)->
 
         console.log h1('Resultcode '+resultcode+':'),code,description unless process.env.JASMINETEA_ID?
         console.log h1('Chat attrs:'),{thread,ticket,mail,user_id,premium} if options.verbose and resultcode is '0'
-          
-        @viewer.emit 'handshaked',{thread,ticket,mail,user_id,premium} if resultcode is '0'
+        
+        @attrs= {thread,ticket,mail,user_id,premium}
+        @viewer.emit 'handshaked',@attrs if resultcode is '0'
         @viewer.emit 'error',data.find('thread').toString() if resultcode isnt '0'
 
-      comments= data.find('chat')
+      comments= data.find 'chat'
       for comment in comments
         element= cheerio comment
 
@@ -82,10 +71,6 @@ module.exports= (live,args...,callback)->
         @viewer.emit 'comment',comment
 
     if options.verbose
-      ms= playerStatus.find('ms')
-      port= ms.find('port').eq(0).text()
-      addr= ms.find('addr').eq(0).text()
-
       console.log h1('Connect to'),"""
       http://#{addr}:#{port}/api/thread?thread=#{thread}&version=#{version}&res_from=#{res_from}
       """

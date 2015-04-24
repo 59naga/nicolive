@@ -8,12 +8,11 @@ id= new Buffer(process.env.LOGIN_ID,'base64').toString()
 pw= new Buffer(process.env.LOGIN_PW,'base64').toString()
 
 describe 'nicolive',->
-  describe 'login',->
+  describe '.login',->
     it 'Not login',(done)->
       nicolive.destroy()
-      nicolive.ping (error,pong)->
+      nicolive.ping (error)->
         expect(error).toEqual 'notlogin'
-        expect(pong).toBe false
 
         done()
 
@@ -25,13 +24,13 @@ describe 'nicolive',->
         done()
 
     it 'Logged in',(done)->
-      nicolive.ping (error,pong)->
+      nicolive.ping (error,playerStatus)->
         expect(error).toBe null
-        expect(pong).toBe yes
+        expect(playerStatus.version).toEqual '20061206'
 
         done()
 
-  describe 'fetchNickname',->
+  describe '.fetchNickname',->
     it 'Found',(done)->
       nicolive.fetchNickname 143728,(error,nickname)->
         expect(error).toBe null
@@ -45,19 +44,74 @@ describe 'nicolive',->
 
         done()
   
-  describe 'view',->
-    it 'nsen',(done)->
-      nicolive.view 'lv218499873',(error,viewer)->
+  describe '.view',->
+    it 'nsen/vocaloid',(done)->
+      nicolive.view 'nsen/vocaloid',(error,viewer)->
         expect(error).toBe null
-        expect(viewer instanceof EventEmitter).toBeTruthy()
+        expect(viewer instanceof EventEmitter).toBe true
+
+        done()
+    it 'nsen/toho',(done)->
+      nicolive.view 'nsen/toho',(error,viewer)->
+        expect(error).toBe null
+        expect(viewer instanceof EventEmitter).toBe true
+
+        done()
+    it 'nsen/nicoindies',(done)->
+      nicolive.view 'nsen/nicoindies',(error,viewer)->
+        expect(error).toBe null
+        expect(viewer instanceof EventEmitter).toBe true
+
+        done()
+    it 'nsen/sing',(done)->
+      nicolive.view 'nsen/sing',(error,viewer)->
+        expect(error).toBe null
+        expect(viewer instanceof EventEmitter).toBe true
+
+        done()
+    it 'nsen/play',(done)->
+      nicolive.view 'nsen/play',(error,viewer)->
+        expect(error).toBe null
+        expect(viewer instanceof EventEmitter).toBe true
+
+        done()
+    it 'nsen/pv',(done)->
+      nicolive.view 'nsen/pv',(error,viewer)->
+        expect(error).toBe null
+        expect(viewer instanceof EventEmitter).toBe true
+
+        done()
+    it 'nsen/hotaru',(done)->
+      nicolive.view 'nsen/hotaru',(error,viewer)->
+        expect(error).toBe null
+        expect(viewer instanceof EventEmitter).toBe true
+
+        done()
+    it 'nsen/allgenre',(done)->
+      nicolive.view 'nsen/allgenre',(error,viewer)->
+        expect(error).toBe null
+        expect(viewer instanceof EventEmitter).toBe true
 
         done()
 
-  describe 'login',->
-    it 'Logged in',(done)->
-      nicolive.ping (error,pong)->
+  describe '.comment',->
+    it 'nsen/hotaru',(done)->
+      nicolive.view 'nsen/hotaru',(error,viewer)->
         expect(error).toBe null
-        expect(pong).toBe yes
+        expect(viewer instanceof EventEmitter).toBe true
+
+        viewer.on 'handshaked',->
+          nicolive.comment (new Date).toString(),(error,status)->
+            expect(error).toBe null
+            expect(status).toBe '0'
+
+            done()
+
+  describe '.logout',->
+    it 'Logged in',(done)->
+      nicolive.ping (error,playerStatus)->
+        expect(error).toBe null
+        expect(playerStatus.version).toEqual '20061206'
 
         done()
 
@@ -69,8 +123,7 @@ describe 'nicolive',->
         done()
 
     it 'Not login',(done)->
-      nicolive.ping (error,pong)->
+      nicolive.ping (error)->
         expect(error).toEqual 'notlogin'
-        expect(pong).toBe false
 
         done()

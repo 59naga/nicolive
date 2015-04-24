@@ -7,7 +7,7 @@ session= null
 sessionCache= path.resolve __dirname,'..','nicolive'
 
 describe 'Session',->
-  it 'constructor',->
+  it '.constructor',->
     session= new Session sessionCache
 
     expect(session.path).toEqual sessionCache+'.json'
