@@ -62,6 +62,8 @@ nicolive.login('your@email.address','********',function(error,cookie){
 });
 ```
 
+[DEMO: atom-shell(Electron) Application](https://github.com/59naga/edgy-comment-viewer)
+
 ## TEST
 ```bash
 export LOGIN_ID=$(echo -n 'YOUR_MAILADDRESS' | base64)
