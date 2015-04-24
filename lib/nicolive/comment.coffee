@@ -6,9 +6,9 @@ api= require '../api'
 chalk= require 'chalk'
 h1= chalk.underline.magenta
 
-module.exports= (text,args...,callback)->
-  options= args[0] ? {}
-  callback?= (error)-> throw error if error
+module.exports= (text,options,callback)->
+  callback= options if typeof options is 'function'
+  callback?= ((error)-> throw error if error)
   return callback new Error 'Disconnected' unless @viewer?
 
   request
@@ -22,9 +22,9 @@ module.exports= (text,args...,callback)->
     console.log h1('Got'),postkey,'by',postkeyBody if options.verbose
 
     chat= cheerio '<chat/>'
-    chat.attr @attrs
+    chat.attr JSON.parse JSON.stringify @attrs
     chat.attr {postkey}
-    chat.text text
+    chat.text text.toString()
 
     @viewer.write chat.toString()+'\0'
     console.log h1('Wrote'),chat.toString()+'\0' if options.verbose

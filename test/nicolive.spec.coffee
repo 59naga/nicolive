@@ -58,8 +58,10 @@ describe 'nicolive',->
         expect(error).toBe null
         expect(viewer instanceof EventEmitter).toBe true
 
-        viewer.on 'handshaked',->
-          nicolive.comment (new Date).toString(),(error,status)->
+        viewer.on 'handshaked',(attrs)->
+          text= 'node-nicolive comment test at '+(new Date)
+          text+= ' via Travis-CI' if process.env.COVERALLS_REPO_TOKEN
+          nicolive.comment text,(error,status)->
             expect(error).toBe null
             expect(status).toBe '0'
 
