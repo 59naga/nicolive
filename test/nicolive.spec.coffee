@@ -36,7 +36,7 @@ describe 'nicolive',->
         done()
 
   describe '.comment',->
-    text= 'node-nicolive comment test at '+(new Date)
+    text= 'node-nicolive test('+(Date.now())+')'
     text+= ' via Travis-CI' if process.env.COVERALLS_REPO_TOKEN
 
     it 'nsen/hotaru',(done)->
