@@ -11,9 +11,11 @@ module.exports= (argv)->
     .version require('../../package').version
     .usage '<liveID> [comment] [options...]'
     .option '-f, --from [number]','Get [0~1000] comment of past.',0
+    .option '-m, --mail [command]','Change [comment] command','184'
     .option '-v, --verbose','Output debug log.'
   cli
     .command 'logout'
+    .description 'Destroy session & Request to https://.../logout'
     .action =>
       @logout ->
         console.log 'Destroied session.'
@@ -42,6 +44,6 @@ module.exports= (argv)->
       return console.error error if error?
 
       viewer.on 'handshaked',=>
-        @comment cli.args[1],cli if cli.args[1]
+        @comment cli.args[1] if cli.args[1]
       viewer.on 'comment',(comment)->
         console.log h2('Received',(comment.attr.no ? '-')+':'),comment.text

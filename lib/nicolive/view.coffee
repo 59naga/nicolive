@@ -17,11 +17,16 @@ module.exports= (live_id,args...,callback)->
     {
       port,addr
       thread,version,res_from
-      comment_count
       user_id,premium,mail
     }= playerStatus
 
-    console.log h1('Request to'),url.comment+thread if options.verbose
+    if options.verbose
+      console.log h1('Connect to'),"""
+      http://#{addr}:#{port}/api/thread?thread=#{thread}&version=#{version}&res_from=#{res_from}
+      """
+      console.log h1('Or  static'),"""
+      http://#{addr}:#{port-2725}/api/thread?thread=#{thread}&version=#{version}&res_from=#{res_from}
+      """
 
     @viewer.destroy() if @viewer?
     @viewer= net.connect port,addr
@@ -39,27 +44,33 @@ module.exports= (live_id,args...,callback)->
       chunks+= chunk
       return unless chunk.match /\0$/
 
-      console.log chunks if options.verbose
+      console.log h1('Received raw'),chunks if options.verbose
       data= cheerio '<data>'+chunks+'</data>'
       chunks= ''
 
       resultcodeValue= data.find('thread').attr 'resultcode'
       if resultcodeValue?.length
         {code,description}= resultcode[resultcodeValue]
-        ticket= data.find('thread').attr 'ticket'
+        foundThread= data.find 'thread'
+        ticket= foundThread.attr 'ticket'
 
-        console.log h1('Resultcode '+resultcodeValue+':'),code,description unless process.env.JASMINETEA_ID?
-        console.log h1('Chat attrs:'),{thread,ticket,mail,user_id,premium} if options.verbose and resultcodeValue is '0'
-        
+        console.log h1('Resultcode '+resultcodeValue),code,description unless process.env.JASMINETEA_ID?
+        if options.verbose and resultcodeValue is '0'
+          console.log h1('Thread'),foundThread.attr()
+          if resultcodeValue is '0'
+            console.log h1('Chat'),{thread,ticket,mail,user_id,premium}
+
+        @playerStatus.last_res= foundThread.attr 'last_res'
         @attrs= {thread,ticket,mail,user_id,premium}
-        @viewer.emit 'handshaked',@attrs if resultcodeValue is '0'
-        @viewer.emit 'error',data.find('thread').toString() if resultcodeValue isnt '0'
+
+        if resultcodeValue is '0'
+          @viewer.emit 'handshaked',@attrs,@playerStatus
+        else
+          @viewer.emit 'error',data.find('thread').toString()
 
       comments= data.find 'chat'
       for comment in comments
         element= cheerio comment
-
-        console.log element.toString() if options.verbose
 
         comment=
           attr: element.attr()
@@ -71,18 +82,6 @@ module.exports= (live_id,args...,callback)->
           comment.usericon= url.usericonURL+user_id.slice(0,2)+'/'+user_id+'.jpg' if user_id
 
         @viewer.emit 'comment',comment
-        @playerStatus.comment_count= comment.attr.no if comment.attr.no>@playerStatus.comment_count
-
-    if options.verbose
-      console.log h1('Connect to'),"""
-      http://#{addr}:#{port}/api/thread?thread=#{thread}&version=#{version}&res_from=#{res_from}
-      """
-      console.log h1('Or  static'),"""
-      http://#{addr}:#{port-2725}/api/thread?thread=#{thread}&version=#{version}&res_from=#{res_from}
-      """
-
-      @viewer.on 'timeout',-> console.log h1('Timeout'),arguments
-      @viewer.on 'lookup',-> console.log h1('Lookup'),arguments
-      @viewer.on 'error',-> console.log h1('Error'),arguments
+        @playerStatus.last_res= comment.attr.no if comment.attr.no>@playerStatus.comment_count
 
     callback null,@viewer

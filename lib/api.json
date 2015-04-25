@@ -1,7 +1,7 @@
 {
   "description":"http://blog.goo.ne.jp/hocomodashi/e/3ef374ad09e79ed5c50f3584b3712d61",
   "url": {
-    "login": "https://secure.nicovideo.jp/secure/login?show_button_twitter=1&site=niconico&show_button_facebook=1&next_url=&facebook=1&nolinks=0&twitter=1",
+    "login": "https://secure.nicovideo.jp/secure/login",
     "logout": "https://secure.nicovideo.jp/secure/logout",
 
     "getPlayerStatus": "http://live.nicovideo.jp/api/getplayerstatus/",

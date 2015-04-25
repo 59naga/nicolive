@@ -10,6 +10,8 @@ class Nicolive extends require './session'
     require './nicolive/ping'
   getPlayerStatus:
     require './nicolive/get-player-status'
+  getPostKey:
+    require './nicolive/get-post-key'
 
   view:
     require './nicolive/view'

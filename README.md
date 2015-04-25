@@ -9,30 +9,53 @@ $ nicolive -V
 # 0.0.2
 ```
 
-## CLI
+## CLI Usage
 ```bash
-$ nicolive lv218499873 --verbose
+Usage: nicolive <liveID> [comment] [options...]
+
+Commands:
+
+  logout      Destroy session & Request to https://.../logout
+  help [cmd]  display help for [cmd]
+
+Options:
+
+  -h, --help            output usage information
+  -V, --version         output the version number
+  -f, --from [number]   Get [0~1000] comment of past.
+  -m, --mail [command]  Change [comment] command
+  -v, --verbose         Output debug log.
+```
+
+```bash
+$ nicolive nsen/hotaru --verbose
 # Please authorization.
-email: your@email.address
-password: ********
-# Request to http://live.nicovideo.jp/api/getplayerstatus/lv218499873
-# Connect to http://msg102.live.nicovideo.jp:2812/api/thread?thread=****&version=20061206&res_from=-1000
-# Or  static http://msg102.live.nicovideo.jp:87/api/thread?thread=****&version=20061206&res_from=-1000
+email: your@mail.address
+password: ******
+# Authorized.
+
+# Request to http://live.nicovideo.jp/api/getplayerstatus/nsen/hotaru
+# Player status { port: '2805',addr: 'omsg103.live.nicovideo.jp',thread: '1431971701',version: '20061206',res_from: -5,user_id: '47972775',premium: '0',comment_count: '25',mail: '184' }
+# Connect to http://omsg103.live.nicovideo.jp:2805/api/thread?thread=1431971701&version=20061206&res_from=-5
+# Or  static http://omsg103.live.nicovideo.jp:80/api/thread?thread=1431971701&version=20061206&res_from=-5
+# Received raw <thread resultcode="0" thread="1431971701" last_res="2257" ticket="0xc998880" revision="1" server_time="1429935582"/><chat ...
 # Resultcode 0 FOUND コメント受信を開始します
+# Thread { resultcode: '0',thread: '1431971701',last_res: '2257',ticket: '0xc998880',revision: '1',server_time: '1429935582' }
+# Chat { thread: '1431971701',ticket: '0xc998880',mail: '184',user_id: '47972775',premium: '0' }
 
 ^C
-$ nicolive lv218499873 わこつ
+$ nicolive nsen/hotaru わこつ
 # Resultcode 0 FOUND コメント受信を開始します
-# Received   1: わこつ
+# Received 2262: わこつ
 
 ^C
 $ nicolive logout
-# Exited
+# Destroied session.
 ```
 
 > [Nsen/vocaloid](http://live.nicovideo.jp/watch/nsen/vocaloid)
 
-## API
+## API Usage
 ```bash
 $ npm install nicolive --save
 ```
