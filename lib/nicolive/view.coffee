@@ -11,7 +11,7 @@ h1= chalk.underline.magenta
 module.exports= (live_id,args...,callback)->
   options= args[0] ? {}
 
-  @getPlayerStatus live_id,options,(error,playerStatus)=>
+  @getPlayerStatus live_id,options,(error,body,playerStatus)=>
     return callback error if error?
     @playerStatus= playerStatus
     {

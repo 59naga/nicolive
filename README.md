@@ -35,7 +35,7 @@ password: ******
 # Authorized.
 
 # Request to http://live.nicovideo.jp/api/getplayerstatus/nsen/hotaru
-# Player status { port: '2805',addr: 'omsg103.live.nicovideo.jp',thread: '1431971701',version: '20061206',res_from: -5,user_id: '47972775',premium: '0',comment_count: '25',mail: '184' }
+# Player status { port: '2805',addr: 'omsg103.live.nicovideo.jp',title: 'Nsen - 蛍の光チャンネル',description: 'Nsenからの去り際に...',thread: '1431971701',version: '20061206',res_from: -5,user_id: '47972775',premium: '0',comment_count: '25',mail: '184' }
 # Connect to http://omsg103.live.nicovideo.jp:2805/api/thread?thread=1431971701&version=20061206&res_from=-5
 # Or  static http://omsg103.live.nicovideo.jp:80/api/thread?thread=1431971701&version=20061206&res_from=-5
 # Received raw <thread resultcode="0" thread="1431971701" last_res="2257" ticket="0xc998880" revision="1" server_time="1429935582"/><chat ...
@@ -70,7 +70,7 @@ nicolive.login('your@email.address','********',function(error,cookie){
     if(error) throw error;
 
     viewer.on('handshaked',function(){
-      nicolive.comment('わこつ');
+      nicolive.comment('わこつ',{mail:'184'});
     });
     viewer.on('comment',function(comment){
       console.log(comment.text);// わこつ

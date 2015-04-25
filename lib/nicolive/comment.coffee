@@ -10,7 +10,7 @@ h1= chalk.underline.magenta
 module.exports= (text,args...,callback)->
   options= args[0] ? {}
   callback= options if typeof options is 'function'
-  callback?= ((error)-> throw error if error)
+  callback= ((error)-> throw error if error) if typeof callback isnt 'function'
   return callback new Error 'Disconnected' unless @viewer?
 
   @getPostKey options,(error,postkey)=>

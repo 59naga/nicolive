@@ -17,13 +17,16 @@ module.exports= (live_id,args...,callback)->
       Cookie: @get()
   ,(error,res,body)=>
     errorMessage= cheerio(body).find('error code').text()
-    return callback error if error?
-    return callback errorMessage if errorMessage.length
+    return callback error,body if error?
+    return callback errorMessage,body if errorMessage.length
 
     playerStatus= cheerio body
     ms= playerStatus.find('ms')
     port= ms.find('port').eq(0).text()
     addr= ms.find('addr').eq(0).text()
+
+    title= playerStatus.find('title').eq(0).text()
+    description= playerStatus.find('description').eq(0).text()
 
     thread= ms.find('thread').eq(0).text()
     version= '20061206'
@@ -38,6 +41,9 @@ module.exports= (live_id,args...,callback)->
       port
       addr
 
+      title
+      description
+      
       thread
       version
       res_from
@@ -47,4 +53,4 @@ module.exports= (live_id,args...,callback)->
       mail
     }
     console.log h1('Player status'),statuses if options.verbose
-    callback null,statuses
+    callback null,body,statuses

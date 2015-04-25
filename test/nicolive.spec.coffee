@@ -21,7 +21,7 @@ describe 'nicolive',->
         done()
 
     it 'Logged in',(done)->
-      nicolive.ping (error,playerStatus)->
+      nicolive.ping (error,rawBody,playerStatus)->
         expect(error).toBe null
         expect(playerStatus.version).toEqual '20061206'
 
@@ -70,7 +70,7 @@ describe 'nicolive',->
 
   describe '.ping',->
     it 'Fetch playerStatus by nsen/vocaloid',(done)->
-      nicolive.ping (error,playerStatus)->
+      nicolive.ping (error,rawBody,playerStatus)->
         expect(error).toBe null
         expect(playerStatus.version).toBe '20061206'
         expect(playerStatus.addr).toContain 'live.nicovideo.jp'
@@ -80,7 +80,7 @@ describe 'nicolive',->
 
   describe '.getPlayerStatus',->
     it 'Fetch playerStatus by live_id',(done)->
-      nicolive.getPlayerStatus 'nsen/hotaru',(error,playerStatus)->
+      nicolive.getPlayerStatus 'nsen/hotaru',(error,rawBody,playerStatus)->
         expect(error).toBe null
         expect(playerStatus.version).toBe '20061206'
         expect(playerStatus.addr).toContain 'live.nicovideo.jp'
@@ -112,7 +112,7 @@ describe 'nicolive',->
   
   describe '.logout',->
     it 'Logged in',(done)->
-      nicolive.ping (error,playerStatus)->
+      nicolive.ping (error,rawBody,playerStatus)->
         expect(error).toBe null
         expect(playerStatus.version).toEqual '20061206'
 
