@@ -66,8 +66,6 @@ describe 'nicolive',->
             expect(chat.attr 'status').toBe '1'
             expect(chat.attr 'no').toBe undefined
 
-            console.log chat.attr()
-
             done()
 
   describe '.ping',->
