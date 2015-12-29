@@ -1,4 +1,4 @@
-# ![node-nicolive][.svg] Node-nicolive [![NPM version][npm-image]][npm] [![Build Status][travis-image]][travis] [![Coverage Status][coveralls-image]][coveralls]
+# ![node-nicolive][.svg] Node-nicolive [![NPM version][npm-image]][npm] [![Coverage Status][coveralls-image]][coveralls]
 
 > Command line comment viewer
 
@@ -111,7 +111,5 @@ License
 
 [npm-image]: https://badge.fury.io/js/nicolive.svg
 [npm]: https://npmjs.org/package/nicolive
-[travis-image]: https://travis-ci.org/59naga/nicolive.svg?branch=master
-[travis]: https://travis-ci.org/59naga/nicolive
 [coveralls-image]: https://coveralls.io/repos/59naga/nicolive/badge.svg?branch=master
 [coveralls]: https://coveralls.io/r/59naga/nicolive?branch=master
