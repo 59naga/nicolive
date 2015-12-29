@@ -54,7 +54,7 @@ module.exports= (live_id,args...,callback)->
         foundThread= data.find 'thread'
         ticket= foundThread.attr 'ticket'
 
-        console.log h1('Resultcode '+resultcodeValue),code,description unless process.env.JASMINETEA_ID?
+        console.log h1('Resultcode '+resultcodeValue),code,description unless @test
         if options.verbose and resultcodeValue is '0'
           console.log h1('Thread'),foundThread.attr()
           if resultcodeValue is '0'

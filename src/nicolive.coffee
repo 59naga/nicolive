@@ -18,6 +18,9 @@ class Nicolive extends require './session'
   comment:
     require './nicolive/comment'
 
+  createStream:
+    require './nicolive/create-stream'
+
   # Login unnecessary
   fetchNickname:
     require './nicolive/fetch-nickname'

@@ -6,6 +6,7 @@
 
     "getPlayerStatus": "http://live.nicovideo.jp/api/getplayerstatus/",
     "getPostKey": "http://live.nicovideo.jp/api/getpostkey",
+    "editstream": "http://live.nicovideo.jp/editstream",
 
     "fetchNickname": "http://seiga.nicovideo.jp/api/user/info?id=",
     

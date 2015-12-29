@@ -8,6 +8,9 @@ cache:
 language: node_js
 node_js:
   - '0.10'
+after_success:
+  - export TRAVIS_PASSED=true
+  - npm install coffee-script --global
 
 # Setting process.env
 env:

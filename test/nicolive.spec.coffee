@@ -1,5 +1,8 @@
-nicolive= require '../lib/nicolive'
+nicolive= require '../src/nicolive'
 EventEmitter= (require 'events').EventEmitter
+
+nicolive.test= yes
+jasmine.DEFAULT_TIMEOUT_INTERVAL= 5000
 
 id= new Buffer(process.env.LOGIN_ID,'base64').toString()
 pw= new Buffer(process.env.LOGIN_PW,'base64').toString()
@@ -23,7 +26,7 @@ describe 'nicolive',->
     it 'Logged in',(done)->
       nicolive.ping (error,rawBody,playerStatus)->
         expect(error).toBe null
-        expect(playerStatus.version).toEqual '20061206'
+        expect(playerStatus?.version).toEqual '20061206'
 
         done()
 
@@ -68,6 +71,14 @@ describe 'nicolive',->
 
             done()
 
+  xdescribe '.createStream',->
+    it 'Create stream using previous live(experimental)',(done)->
+      nicolive.createStream {},(error,live_id)->
+        expect(error).toBe null
+        expect(live_id).toMatch /live.nicovideo.jp\/watch\/lv/
+
+        done()
+
   describe '.ping',->
     it 'Fetch playerStatus by nsen/vocaloid',(done)->
       nicolive.ping (error,rawBody,playerStatus)->
@@ -106,7 +117,7 @@ describe 'nicolive',->
     it 'Not found',(done)->
       nicolive.fetchNickname 0,(error,nickname)->
         expect(error).toBe null
-        expect(nickname).toEqual '-'
+        expect(nickname).toEqual ''
 
         done()
   
@@ -114,7 +125,7 @@ describe 'nicolive',->
     it 'Logged in',(done)->
       nicolive.ping (error,rawBody,playerStatus)->
         expect(error).toBe null
-        expect(playerStatus.version).toEqual '20061206'
+        expect(playerStatus?.version).toEqual '20061206'
 
         done()
 

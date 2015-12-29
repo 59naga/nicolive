@@ -1,4 +1,4 @@
-Session= require '../lib/session'
+Session= require '../src/session'
 
 fs= require 'fs'
 path= require 'path'
@@ -13,20 +13,20 @@ describe 'Session',->
     expect(session.path).toEqual sessionCache+'.json'
 
   it '.set',->
-    session.set "hoge=fuga;"
+    session.set 'hoge=fuga;'
 
-    expect(session.cache.cookie).toEqual "hoge=fuga;" 
+    expect(session.cache.cookie).toEqual 'hoge=fuga;'
 
   it '.save',->
     session.save()
     cache= require sessionCache+'.json'
 
-    expect(cache.cookie).toEqual "hoge=fuga;"
+    expect(cache.cookie).toEqual 'hoge=fuga;'
 
   it '.get',->
     cookie= session.get()
 
-    expect(cookie).toEqual "hoge=fuga;" 
+    expect(cookie).toEqual 'hoge=fuga;'
 
   it '.destroy',->
     session.destroy()
