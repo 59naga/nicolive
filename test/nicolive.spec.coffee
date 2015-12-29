@@ -50,6 +50,7 @@ describe 'nicolive',->
         viewer.on 'handshaked',->
           lastRes= parseInt nicolive.playerStatus.last_res
           nicolive.comment text,(error,chat)->
+            expect(error).toBe null
             expect(chat.attr 'thread').toBe nicolive.playerStatus.thread
             expect(chat.attr 'status').toBe '0'
             expect(chat.attr 'no').toBe (lastRes+1).toString()

@@ -43,5 +43,6 @@ module.exports= (text,args...,callback)->
       @viewer.removeListener 'data',chatResult
       
       {code,description}= status[statusValue]
+      error= null
       error= new Error 'Status is '+statusValue+':'+code+' '+description if statusValue isnt '0'
       callback error,data.find('chat_result')
