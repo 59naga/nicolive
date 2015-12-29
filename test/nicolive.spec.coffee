@@ -55,6 +55,7 @@ describe 'nicolive',->
             expect(chat.attr 'status').toBe '0'
             expect(chat.attr 'no').toBe (lastRes+1).toString()
 
+            viewer.destroy()
             done()
 
     it 'nsen/hotaru (Status is 1)',(done)->
@@ -70,6 +71,7 @@ describe 'nicolive',->
             expect(chat.attr 'status').toBe '1'
             expect(chat.attr 'no').toBe undefined
 
+            viewer.destroy()
             done()
 
   xdescribe '.createStream',->

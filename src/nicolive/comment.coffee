@@ -13,6 +13,7 @@ module.exports= (text,args...,callback)->
   callback= ((error)-> throw error if error) if typeof callback isnt 'function'
   return callback new Error 'Disconnected' unless @viewer?
 
+  chat= null
   @getPostKey options,(error,postkey)=>
     return callback error if error?
     
@@ -44,5 +45,6 @@ module.exports= (text,args...,callback)->
       
       {code,description}= status[statusValue]
       error= null
-      error= new Error 'Status is '+statusValue+':'+code+' '+description if statusValue isnt '0'
+      if statusValue isnt '0'
+        error= new Error 'Status is '+statusValue+':'+code+' '+description+JSON.stringify(chat.attr(),null,2)
       callback error,data.find('chat_result')
