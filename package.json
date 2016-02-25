@@ -2,7 +2,7 @@
   "name": "nicolive",
   "bin" : "nicolive",
   "description": "Command line comment viewer",
-  "version": "0.0.4-alpha",
+  "version": "0.0.4",
 
   "main": "lib/nicolive",
   "files": [

@@ -25,6 +25,8 @@ module.exports= (live_id,args...,callback)->
     port= ms.find('port').eq(0).text()
     addr= ms.find('addr').eq(0).text()
 
+    open_time= playerStatus.find('open_time').eq(0).text()
+
     title= playerStatus.find('title').eq(0).text()
     description= playerStatus.find('description').eq(0).text()
 
@@ -40,6 +42,8 @@ module.exports= (live_id,args...,callback)->
     statuses= {
       port
       addr
+
+      open_time
 
       title
       description

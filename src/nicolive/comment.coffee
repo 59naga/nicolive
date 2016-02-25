@@ -16,9 +16,13 @@ module.exports= (text,args...,callback)->
   chat= null
   @getPostKey options,(error,postkey)=>
     return callback error if error?
+
+    # 開場時間からの経過秒数 * 100（恐らく）
+    vpos= (Math.floor(Date.now()/1000) - @playerStatus.open_time) * 100
     
     chat= cheerio '<chat/>'
     chat.attr JSON.parse JSON.stringify @attrs
+    chat.attr {vpos}
     chat.attr {postkey}
     chat.attr 'mail',options.mail if options.mail?
     chat.text text.toString()
