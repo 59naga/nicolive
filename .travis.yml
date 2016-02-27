@@ -1,0 +1,34 @@
+# Quick boot options
+sudo: false
+cache:
+  directories:
+    - node_modules
+
+# Ignore version tags
+branches:
+  except:
+    - /^v[0-9]/
+
+# Language options
+language: node_js
+node_js:
+  - 4
+after_success:
+  - export TRAVIS_PASSED=true
+
+env:
+  global:
+    # COVERALLS_REPO_TOKEN
+    - secure: qk9Yxdd7zu+sg+t7PtVSm/+JWQMln+Z9+5qSk8A9VTryL9vLERmiQQyw+GcqIpC35qV61ORypj03ndpS7uJPgbKbqJHd1TqV+wWHYUJaXRLij8aJOxtI8Q1GhqQ/nKE6cKCNVpyu7MIExR8GShO38w5xC9Ohsf0Tb4YRAgc7/i0=
+    # LOGIN_ID / LOGIN_PW
+    - secure: PoHIPXqQ5wNbvnPkSK1Ya3DGCHCQOYWXuaojNTfycAJnYOxB6SneCXh4gzcCQDmtJq0QjLob1pzOIQveydjkzCHJ3Tsii9sV+3SS7RUUGw8Y0aiyGDg7yOn9PyOmtGPq6rYn/85of3v4TdKrlTFEQaYtsw+M7kkHto6408osrJM=
+    - secure: P3z9xSssaz/+/oghQYPCYobnZlsLiTRSWJAOOcWZc1p80G4T6Gr4wZa6e7nRJeu9tqbCJqh1HeYtXqzUP7dhVAW98Js1jsCn3kwwT0W2WTKw034F6KvOz7wB+7QwuOBDtExYBUDBBIbzbdt9MnBTu87aNt7v+ZbmIIgN4Z4lj60=
+
+# Npm publish options
+before_deploy:
+  - npm install coffee-script --global
+deploy:
+  provider: npm
+  email: i59naga@icloud.com
+  api_key:
+    secure: grPK4fKUtoPAHEVSs6L2PF8RlIen29lHqeHoPNWT2G5KcG/EBq3V512CFZ6Nbp1oSj86dUND3Tw5xQzOiEkx6s//zFAtYtapPFQGMQZ4VDbDN3WHflBtnq4pMNMZTFbtVjCh6l/rTyrwfRvDfnA5b8fFGThEn1gnyh4HEOZO1bs=
