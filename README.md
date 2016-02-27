@@ -1,4 +1,17 @@
-# ![node-nicolive][.svg] Node-nicolive [![NPM version][npm-image]][npm] [![Coverage Status][coveralls-image]][coveralls]
+![icon](https://cdn.rawgit.com/59naga/nicolive/master/.svg) Node Nicolive
+---
+
+<p align="right">
+  <a href="https://npmjs.org/package/nicolive">
+    <img src="https://img.shields.io/npm/v/nicolive.svg?style=flat-square">
+  </a>
+  <a href="https://travis-ci.org/59naga/nicolive">
+    <img src="http://img.shields.io/travis/59naga/nicolive.svg?style=flat-square">
+  </a>
+  <a href="https://coveralls.io/r/59naga/nicolive.io?branch=master">
+    <img src="http://img.shields.io/coveralls/59naga/nicolive.io.svg?style=flat-square">
+  </a>
+</p>
 
 > Command line comment viewer
 
@@ -96,20 +109,14 @@ npm test
 ## 参考
 * [niconicoのメッセージ(コメント)サーバーのタグや送り方の説明 2014-03-18 by hocomodashi][A]
 * [ニコニコAPIリストwiki][B]
+* [Nodejsでニコ生のコメビュを作る - Qiita][C]
 * [node-nicovideo-api by Ragg-][X]
 
 [A]: http://blog.goo.ne.jp/hocomodashi/e/3ef374ad09e79ed5c50f3584b3712d61
 [B]: http://www59.atwiki.jp/nicoapi/
+[C]: http://qiita.com/59naga/items/0a22e30f019aaef683e4
 [X]: https://github.com/Ragg-/node-nicovideo-api
 
 License
-=========================
-[MIT][License] by 59naga
-
-[License]: http://59naga.mit-license.org/
-[.svg]: https://cdn.rawgit.com/59naga/nicolive/master/.svg
-
-[npm-image]: https://badge.fury.io/js/nicolive.svg
-[npm]: https://npmjs.org/package/nicolive
-[coveralls-image]: https://coveralls.io/repos/59naga/nicolive/badge.svg?branch=master
-[coveralls]: https://coveralls.io/r/59naga/nicolive?branch=master
+---
+[MIT](http://59naga.mit-license.org/)
