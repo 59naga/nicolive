@@ -21,7 +21,7 @@ module.exports= (args...,callback)->
   request
     url: getPostKey
     headers:
-      Cookie: @get()
+      Cookie: if options.cookie then options.cookie else @get()
   ,(error,res,postkeyBody)=>
     return callback error if error?
     [...,postkey]= postkeyBody.split '='

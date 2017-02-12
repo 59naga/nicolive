@@ -14,7 +14,7 @@ module.exports= (live_id,args...,callback)->
   request
     url: url.getPlayerStatus+live_id
     headers:
-      Cookie: @get()
+      Cookie: if options.cookie then options.cookie else @get()
   ,(error,res,body)=>
     errorMessage= cheerio(body).find('error code').text()
     return callback error,body if error?
